@@ -1,6 +1,7 @@
 package io.jenkins.plugins;
 
 import hudson.Extension;
+import hudson.model.AbstractDescribableImpl;
 import hudson.model.Describable;
 import hudson.model.Descriptor;
 import jenkins.model.Jenkins;
@@ -10,7 +11,7 @@ import org.apache.commons.lang.builder.ToStringBuilder;
 import org.apache.commons.lang.builder.ToStringStyle;
 import org.kohsuke.stapler.DataBoundConstructor;
 
-public class DingTalkParamNotify implements Describable<DingTalkParamNotify> {
+public class DingTalkParamNotify extends AbstractDescribableImpl<DingTalkParamNotify> {
 
     private static final long serialVersionUID = 1L;
 

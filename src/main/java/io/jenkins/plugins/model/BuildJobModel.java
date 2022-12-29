@@ -36,17 +36,16 @@ public class BuildJobModel {
 
     return Utils.join(
         Arrays.asList(
-            String.format("# [%s](%s)", projectName, projectUrl),
+            String.format("# [%s %s](%s)", projectName, jobName, jobUrl),
             "---",
-            String.format("- 任务：[%s](%s)", jobName, jobUrl),
-            String.format("- 状态：%s",
+            String.format("- 执行人：%s", executorName),
+            String.format("- 状态：%s(%s)",
                 Utils.dye(
                     statusType.getLabel(),
                     statusType.getColor()
-                )
+                ),
+                duration
             ),
-            String.format("- 持续时间：%s", duration),
-            String.format("- 执行人：%s", executorName),
             content == null ? "" : content
         )
     );

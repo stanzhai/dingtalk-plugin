@@ -9,8 +9,6 @@ import hudson.Util;
 import hudson.model.AbstractProject;
 import hudson.model.Cause;
 import hudson.model.Job;
-import hudson.model.JobProperty;
-import hudson.model.JobPropertyDescriptor;
 import hudson.model.Result;
 import hudson.model.Run;
 import hudson.model.TaskListener;
@@ -27,7 +25,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.regex.Pattern;
-import java.util.regex.PatternSyntaxException;
 import java.util.stream.Collectors;
 
 import io.jenkins.plugins.enums.BuildStatusEnum;
@@ -217,10 +214,12 @@ public class DingTalkPlugin extends Notifier implements SimpleBuildStep {
     DingTalkGlobalConfig globalConfig = DingTalkGlobalConfig.getInstance();
     boolean verbose = globalConfig.isVerbose();
     if (verbose) {
-      // Logger.line(listener, LineType.START);
-      Logger.debug(listener, "钉钉插件：" + formatMsg, args);
-      // Logger.line(listener, LineType.END);
+      forceLog(listener, formatMsg, args);
     }
+  }
+
+  private void forceLog(TaskListener listener, String formatMsg, Object... args) {
+    Logger.debug(listener, "[DingTalk] " + formatMsg, args);
   }
 
   private Map<String, String> getUser(Run<?, ?> run, TaskListener listener) {
@@ -299,7 +298,7 @@ public class DingTalkPlugin extends Notifier implements SimpleBuildStep {
     EnvVars envVars = getEnvVars(run, listener);
     final String regexp = envVars.get(parameterName);
     if (regexp == null) {
-      throw new RuntimeException("parameterName正则表达式为空，参数错误：" + parameterName);
+      throw new RuntimeException("parameterName配置错误，未找到参数名为：" + parameterName + "，的正则表达式");
     }
 
     final Pattern pattern = Pattern.compile(regexp);
@@ -312,10 +311,10 @@ public class DingTalkPlugin extends Notifier implements SimpleBuildStep {
     }
     String robotName = notifierConfig.getRobotName();
     if (pattern.matcher(label).matches()) {
-      log(listener, "Notifying to [%s] - Label [%s] matches expression [%s]", robotName, label, pattern.pattern());
+      forceLog(listener, "Notifying to [%s] - Label [%s] matches expression [%s]", robotName, label, pattern.pattern());
       return true;
     } else {
-      log(listener, "Skipping to [%s] - Label [%s] does not match expression [%s]", robotName, label, pattern.pattern());
+      forceLog(listener, "Skipping to [%s] - Label [%s] does not match expression [%s]", robotName, label, pattern.pattern());
       return false;
     }
   }
