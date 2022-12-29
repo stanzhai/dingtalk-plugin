@@ -34,6 +34,8 @@ public class DingTalkNotifierConfig extends AbstractDescribableImpl<DingTalkNoti
 
   private String content;
 
+  private String label;
+
   private Set<String> noticeOccasions;
 
   private static Set<String> getDefaultNoticeOccasions() {
@@ -56,6 +58,10 @@ public class DingTalkNotifierConfig extends AbstractDescribableImpl<DingTalkNoti
     return content == null ? "" : content;
   }
 
+  public String getLabel() {
+    return label == null ? "" : label;
+  }
+
   @DataBoundConstructor
   public DingTalkNotifierConfig(
       boolean checked,
@@ -64,6 +70,7 @@ public class DingTalkNotifierConfig extends AbstractDescribableImpl<DingTalkNoti
       boolean atAll,
       String atMobile,
       String content,
+      String label,
       Set<String> noticeOccasions) {
     this.checked = checked;
     this.robotId = robotId;
@@ -71,6 +78,7 @@ public class DingTalkNotifierConfig extends AbstractDescribableImpl<DingTalkNoti
     this.atAll = atAll;
     this.atMobile = atMobile;
     this.content = content;
+    this.label = label;
     this.noticeOccasions = noticeOccasions;
   }
 
@@ -82,6 +90,7 @@ public class DingTalkNotifierConfig extends AbstractDescribableImpl<DingTalkNoti
         false,
         null,
         null,
+        null,
         getDefaultNoticeOccasions());
   }
 
@@ -90,6 +99,7 @@ public class DingTalkNotifierConfig extends AbstractDescribableImpl<DingTalkNoti
     this.setAtAll(notifierConfig.isAtAll());
     this.setAtMobile(notifierConfig.getAtMobile());
     this.setContent(notifierConfig.getContent());
+    this.setLabel(notifierConfig.getLabel());
     this.setNoticeOccasions(notifierConfig.getNoticeOccasions());
   }
 

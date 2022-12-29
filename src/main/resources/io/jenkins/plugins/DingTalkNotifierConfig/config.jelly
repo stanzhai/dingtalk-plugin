@@ -38,6 +38,9 @@
         <f:entry field="content" title="自定义内容">
           <f:textarea/>
         </f:entry>
+        <f:entry field="label" title="Label">
+          <f:textbox/>
+        </f:entry>
       </f:advanced>
 
       <f:invisibleEntry>

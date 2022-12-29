@@ -185,7 +185,8 @@ public class DingTalkRunListener extends RunListener<Run<?, ?>> {
 
   private void send(Run<?, ?> run, TaskListener listener, NoticeOccasionEnum noticeOccasion) {
     Job<?, ?> job = run.getParent();
-    DingTalkJobProperty property = job.getProperty(DingTalkJobProperty.class);
+    //DingTalkPlugin property = job.getProperty(DingTalkPlugin.class);
+    DingTalkPlugin property = null;
 
     if (property == null) {
       this.log(listener, "不支持的项目类型，已跳过");

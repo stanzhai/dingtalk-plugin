@@ -26,6 +26,8 @@
         <st:include page="config.jelly" class="${descriptor.clazz}"/>
       </j:scope>
     </f:repeatable>
+
+    <f:optionalProperty title="Parameterized notifying" field="paramNotify"/>
   </f:entry>
   <!--  </f:descriptorList>-->
 
