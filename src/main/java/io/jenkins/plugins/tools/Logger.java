@@ -60,7 +60,6 @@ public class Logger {
    */
   public static void debug(TaskListener listener, String msg, Object... args) {
     PrintStream logger = listener.getLogger();
-    logger.println();
     logger.printf((msg) + "%n", args);
   }
 
