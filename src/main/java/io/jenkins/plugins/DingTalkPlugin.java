@@ -20,6 +20,7 @@ import io.jenkins.plugins.DingTalkNotifierConfig.DingTalkNotifierConfigDescripto
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -310,7 +311,8 @@ public class DingTalkPlugin extends Notifier implements SimpleBuildStep {
       label = Util.replaceMacro(rawLabel, envVars);
     }
     String robotName = notifierConfig.getRobotName();
-    if (pattern.matcher(label).matches()) {
+    boolean match = Arrays.stream(label.split(",")).anyMatch(t -> pattern.matcher(t).matches());
+    if (match) {
       forceLog(listener, "Notifying to [%s] - Label [%s] matches expression [%s]", robotName, label, pattern.pattern());
       return true;
     } else {
