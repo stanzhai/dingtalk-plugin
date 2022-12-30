@@ -39,7 +39,7 @@ public class BuildJobModel {
             String.format("# [%s %s](%s)", projectName, jobName, jobUrl),
             "---",
             String.format("- 执行人：%s", executorName),
-            String.format("- 状态：%s(%s)",
+            String.format("- 状态：%s (%s)",
                 Utils.dye(
                     statusType.getLabel(),
                     statusType.getColor()

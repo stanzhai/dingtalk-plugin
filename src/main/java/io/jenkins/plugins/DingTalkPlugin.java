@@ -338,7 +338,7 @@ public class DingTalkPlugin extends Notifier implements SimpleBuildStep {
     BuildStatusEnum statusType = getBuildStatus(noticeOccasion);
     String jobName = run.getDisplayName();
     String jobUrl = rootPath + run.getUrl();
-    String duration = run.getDurationString();
+    String duration = run.getDurationString().replace(" and counting", "");
     List<ButtonModel> btns = Utils.createDefaultBtns(jobUrl);
     List<String> result = new ArrayList<>();
     List<DingTalkNotifierConfig> notifierConfigs = property.getCheckedNotifierConfigs();
